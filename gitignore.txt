@@ -1,0 +1,45 @@
+# Python 기본 설정
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# 가상 환경
+venv/
+.env/
+.envrc
+.venv/
+*.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# IDE 설정 파일
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# 운영체제 관련 파일
+.DS_Store   # macOS
+Thumbs.db   # Windows
+
+# 환경 변수 파일
+*.env
+*.env.*
+
+# 기타 설정 파일
+*.ini
+*.cfg
+
+# 설치된 라이브러리
+__pypackages__/
+site-packages/
+
