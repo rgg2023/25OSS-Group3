@@ -17,15 +17,15 @@
 **Photo Filter Application with OpenCV (Mosaic & More)**
 
 ## Project Overview
-This repository is dedicated to the Group 26 term project for the **Open Source Software Course, 2024**, at **Gachon University**. Our project involves applying various filters, such as mosaic effects, to photos using OpenCV. Through this project, we aim to explore image processing techniques in an open-source context.
+This repository is dedicated to the Group 3 term project for the **Open Source Software Course, 2025**, at **Gachon University**. Our project involves applying various filters, such as mosaic effects, to photos using OpenCV. Through this project, we aim to explore image processing techniques in an open-source context.
 
 
 ## Team Members
 | Name | GitHub Profile                                                                                                           | Email                                                                                              |
 |------|--------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
 | 김효현  | [<img src="https://img.shields.io/badge/GitHub-rgg2023-black?logo=github" alt="rgg2023">](https://github.com/rgg2023)    | <img src="https://img.shields.io/badge/gyguspr@gachon.ac.kr-blue" alt="gyguspr@gachon.ac.kr">      |
-|      | [<img src="https://img.shields.io/badge/GitHub--black?logo=github" alt="">](https://github.com/cire21st) | <img src="https://img.shields.io/badge/-blue" alt="">        |
-|      | [<img src="https://img.shields.io/badge/GitHub--black?logo=github" alt="">](https://github.com/yeun23)       | <img src="https://img.shields.io/badge/-blue" alt=""> | 
+|      | [<img src="https://img.shields.io/badge/GitHub--black?logo=github" alt="">](https://github.com/) | <img src="https://img.shields.io/badge/-blue" alt="">        |
+|      | [<img src="https://img.shields.io/badge/GitHub--black?logo=github" alt="">](https://github.com/)       | <img src="https://img.shields.io/badge/-blue" alt=""> | 
 
 
 ## Project Structure
