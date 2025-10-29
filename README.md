@@ -13,7 +13,7 @@
   <i>* Note: It is optional but highly recommended to use <b>PyCharm</b> as the development environment for this project. PyCharm provides excellent tools for managing virtual environments, debugging, and organizing code efficiently.</i>
 </p>
 
-# 24OSS-Group26  
+# 25OSS-Group3  
 **Photo Filter Application with OpenCV (Mosaic & More)**
 
 ## Project Overview
@@ -113,13 +113,13 @@ The directory structure for this repository is as follows:
 1. **Clone the Repository**  
    Clone this repository to your local machine:
    ```bash
-   git clone https://github.com/24OSS-Group26/24OSS-Group26.git
+   git clone https://github.com/rgg2023/25OSS-Group3.git
    ```
    
 2. **Navigate to the Project Directory**  
    Change to the project directory:
    ```bash
-   cd 24OSS-Group26
+   cd 25OSS-Group3
    ```
 
 3. **Install Dependencies**  
