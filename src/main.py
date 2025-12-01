@@ -38,7 +38,7 @@ class FilterApp:
         self.root.rowconfigure(2, weight=1)
         self.root.columnconfigure(0, weight=1)
         ctk.set_appearance_mode("Dark")
-        ctk.set_default_color_theme("blue")
+        ctk.set_default_color_theme("dark-blue")
 
         self.images = []  # 여러 장의 이미지를 저장할 리스트
         self.cv_images = []  # OpenCV 이미지 저장
@@ -51,7 +51,7 @@ class FilterApp:
     def init_gui(self):
         # Title
         title_label = ctk.CTkLabel(self.root, text="Photo Filter Application", font=("Arial", 28, "bold"),
-                                   text_color="#1abc9c")
+                                   text_color="#FFD700")
         title_label.grid(row=0, column=0, pady=10, sticky="n")
 
         # Top buttons (Open, Save)
@@ -60,22 +60,26 @@ class FilterApp:
         button_frame_top.columnconfigure((0, 1), weight=1)
 
         btn_open = ctk.CTkButton(button_frame_top, text="Open Images", command=self.open_images, width=180,
-                                 fg_color="#27ae60")
-        btn_open.grid(row=0, column=0, padx=15, pady=10, sticky="w")
+                                 fg_color="#2980b9")
+        btn_open.grid(row=0, column=0, padx=20, pady=10, sticky="w")
 
         btn_save = ctk.CTkButton(button_frame_top, text="Save All", command=self.save_all_images, width=180,
-                                 fg_color="#3498db")
-        btn_save.grid(row=0, column=1, padx=15, pady=10, sticky="e")
+                                 fg_color="#2980b9")
+        btn_save.grid(row=0, column=1, padx=20, pady=10, sticky="e")
 
         # Canvas Frame
         self.canvas_frame = ctk.CTkFrame(self.root, fg_color="transparent")
         self.canvas_frame.grid(row=2, column=0, pady=10, padx=20, sticky="nsew")
-        self.canvas = ctk.CTkCanvas(self.canvas_frame, bg="gray", bd=0, highlightthickness=0)
+        self.canvas = ctk.CTkCanvas(self.canvas_frame, bg="#333333", bd=0, highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
 
         # Canvas Navigation Buttons
-        self.left_button = ctk.CTkButton(self.canvas, text="<", width=40, command=self.show_previous_image)
-        self.right_button = ctk.CTkButton(self.canvas, text=">", width=40, command=self.show_next_image)
+        self.left_button = ctk.CTkButton(self.canvas, text="<", width=40, height=40, corner_radius=20, # 둥근 모양 추가
+                                        fg_color="rgba(0,0,0,0.4)", hover_color="rgba(0,0,0,0.6)", # 반투명한 배경색
+                                        text_color="#FFFFFF", command=self.show_previous_image)
+        self.right_button = ctk.CTkButton(self.canvas, text=">", width=40, height=40, corner_radius=20, # 둥근 모양 추가
+                                         fg_color="rgba(0,0,0,0.4)", hover_color="rgba(0,0,0,0.6)", # 반투명한 배경색
+                                         text_color="#FFFFFF", command=self.show_next_image)
 
         # Initially hide buttons
         self.left_button.place_forget()
@@ -87,7 +91,7 @@ class FilterApp:
 
         # Current Filter Label
         self.filter_label = ctk.CTkLabel(self.root, text=f"Current Filter: None",
-                                         font=("Arial", 16), text_color="#00d2d3")
+                                         font=("Arial", 16, "bold"), text_color="#FFD700")
         self.filter_label.grid(row=3, column=0, pady=5, sticky="n")
 
         # Filter Buttons
@@ -113,7 +117,7 @@ class FilterApp:
             ("Sticker", self.apply_sticker_filter),
         ]
 
-        button_width = 180
+        button_width = 120 
         for i, (text, command) in enumerate(filters):
             ctk.CTkButton(button_frame, text=f"{text} Filter", command=command, width=button_width).grid(
                 row=i // 5, column=i % 5, padx=10, pady=5, sticky="nsew"
