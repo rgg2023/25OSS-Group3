@@ -1,12 +1,14 @@
+# src/filters/remove_person.py
+
 import cv2
 import numpy as np
 from transformers import AutoModelForImageSegmentation, AutoProcessor
 import torch
 
-
+# PersonRemover 클래스 초기화 (한 번만)
 class PersonRemover:
     def __init__(self):
-        # HuggingFace의 RemBG 최고 성능 모델
+        # HuggingFace의 RemBG 최신 모델
         model_name = "briaai/RMBG-1.4"
 
         self.processor = AutoProcessor.from_pretrained(model_name)
@@ -16,9 +18,8 @@ class PersonRemover:
         """
         인물 제거 + 자연스러운 배경 복원 (RMBG 모델 기반)
         image: (numpy.ndarray), BGR 이미지
-        return: 사람 제거 후의 이미지
+        return: 사람 제거 후 이미지
         """
-
         # BGR → RGB
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
@@ -30,14 +31,20 @@ class PersonRemover:
 
         # 마스크 추출
         mask = outputs.pred_masks.squeeze().cpu().numpy()  # float mask
+        mask = (mask > 0.5).astype(np.uint8) * 255         # 0~1 → 0 또는 255
 
-        # 0~1 → 0 또는 255
-        mask = (mask > 0.5).astype(np.uint8) * 255
-
-        # OpenCV inpaint로 사람 영역 제거 후 자연스럽게 보정
+        # OpenCV inpaint로 사람 영역 제거
         inpainted = cv2.inpaint(image, mask, 3, cv2.INPAINT_TELEA)
 
         return inpainted
+
+
+# PersonRemover 객체 한 번만 생성
+remover = PersonRemover()
+
+# FilterApp에서 호출할 함수
+def apply_remove_person(image):
+    return remover.remove_person(image)
 
 
 '''
