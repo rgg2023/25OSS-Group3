@@ -3,26 +3,41 @@ import numpy as np
 from transformers import AutoModelForImageSegmentation, AutoProcessor
 import torch
 
+
 class PersonRemover:
     def __init__(self):
+        # HuggingFace의 RemBG 최고 성능 모델
         model_name = "briaai/RMBG-1.4"
+
         self.processor = AutoProcessor.from_pretrained(model_name)
         self.model = AutoModelForImageSegmentation.from_pretrained(model_name)
 
-    def remove_person(self, img_path):
-        image = cv2.imread(img_path)
+    def remove_person(self, image):
+        """
+        인물 제거 + 자연스러운 배경 복원 (RMBG 모델 기반)
+        image: (numpy.ndarray), BGR 이미지
+        return: 사람 제거 후의 이미지
+        """
+
+        # BGR → RGB
         rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
+        # 모델 입력
         inputs = self.processor(images=rgb, return_tensors="pt")
+
         with torch.no_grad():
             outputs = self.model(**inputs)
 
-        mask = outputs.pred_masks.squeeze().cpu().numpy()
-        mask = (mask > 0.5).astype(np.uint8) * 255  # 이진화
+        # 마스크 추출
+        mask = outputs.pred_masks.squeeze().cpu().numpy()  # float mask
 
-        # 사람 부분 제거 후 inpaint
-        removed = cv2.inpaint(image, mask, 3, cv2.INPAINT_NS)
-        return removed
+        # 0~1 → 0 또는 255
+        mask = (mask > 0.5).astype(np.uint8) * 255
+
+        # OpenCV inpaint로 사람 영역 제거 후 자연스럽게 보정
+        inpainted = cv2.inpaint(image, mask, 3, cv2.INPAINT_TELEA)
+
+        return inpainted
 
 
 '''
