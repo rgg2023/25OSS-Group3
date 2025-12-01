@@ -25,7 +25,7 @@ This repository is dedicated to the Group 3 term project for the **Open Source S
 |------|--------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
 | 김효현  | [<img src="https://img.shields.io/badge/GitHub-rgg2023-black?logo=github" alt="rgg2023">](https://github.com/rgg2023)    | <img src="https://img.shields.io/badge/gyguspr@gachon.ac.kr-blue" alt="gyguspr@gachon.ac.kr">      |
 |      | [<img src="https://img.shields.io/badge/GitHub--black?logo=github" alt="">](https://github.com/) | <img src="https://img.shields.io/badge/-blue" alt="">        |
-|      | [<img src="https://img.shields.io/badge/GitHub--black?logo=github" alt="">](https://github.com/)       | <img src="https://img.shields.io/badge/-blue" alt=""> | 
+| 김유빈  | [<img src="https://img.shields.io/badge/GitHub--black?logo=github" alt="yubin047">](https://github.com/yubin047)       | <img src="https://img.shields.io/badge/yubin047@gachon.ac.kr-blue" alt="yubin047@gachon.ac.kr"> | 
 
 
 ## Project Structure
