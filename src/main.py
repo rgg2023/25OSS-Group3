@@ -40,6 +40,11 @@ class FilterApp:
         ctk.set_appearance_mode("Dark")
         ctk.set_default_color_theme("dark-blue")
 
+        self.open_save_button_width = 150
+        self.filter_button_width = 120
+        self.primary_color = "#FFD700"
+        self.secondary_color = "#2980b9"
+
         self.images = []  # 여러 장의 이미지를 저장할 리스트
         self.cv_images = []  # OpenCV 이미지 저장
         self.original_images = []  # 원본 이미지 저장
@@ -51,7 +56,7 @@ class FilterApp:
     def init_gui(self):
         # Title
         title_label = ctk.CTkLabel(self.root, text="Photo Filter Application", font=("Arial", 28, "bold"),
-                                   text_color="#FFD700")
+                                   text_color=self.primary_color)
         title_label.grid(row=0, column=0, pady=10, sticky="n")
 
         # Top buttons (Open, Save)
@@ -59,12 +64,12 @@ class FilterApp:
         button_frame_top.grid(row=1, column=0, pady=5, sticky="ew")
         button_frame_top.columnconfigure((0, 1), weight=1)
 
-        btn_open = ctk.CTkButton(button_frame_top, text="Open Images", command=self.open_images, width=180,
-                                 fg_color="#2980b9")
+        btn_open = ctk.CTkButton(button_frame_top, text="Open Images", command=self.open_images, 
+                                 width=self.open_save_button_width, fg_color=self.secondary_color)
         btn_open.grid(row=0, column=0, padx=20, pady=10, sticky="w")
 
-        btn_save = ctk.CTkButton(button_frame_top, text="Save All", command=self.save_all_images, width=180,
-                                 fg_color="#2980b9")
+        btn_save = ctk.CTkButton(button_frame_top, text="Save All", command=self.save_all_images, 
+                                 width=self.open_save_button_width, fg_color=self.secondary_color)
         btn_save.grid(row=0, column=1, padx=20, pady=10, sticky="e")
 
         # Canvas Frame
@@ -117,12 +122,15 @@ class FilterApp:
             ("Sticker", self.apply_sticker_filter),
         ]
 
-        button_width = 120 
+        button_width = self.filter_button_width 
         for i, (text, command) in enumerate(filters):
             ctk.CTkButton(button_frame, text=f"{text} Filter", command=command, width=button_width).grid(
-                row=i // 5, column=i % 5, padx=10, pady=5, sticky="nsew"
-            )
-
+        row=i // 5, 
+        column=i % 5, 
+        padx=10, 
+        pady=5, 
+        sticky="nsew"
+    )
         footer_label = ctk.CTkLabel(self.root, text="Tip: Load multiple images, apply filters, and save them!",
                                     font=("Arial", 14), text_color="#bdc3c7")
         footer_label.grid(row=5, column=0, pady=10, sticky="n")
