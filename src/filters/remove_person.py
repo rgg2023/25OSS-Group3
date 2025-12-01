@@ -1,38 +1,28 @@
 import cv2
 import numpy as np
-import mediapipe as mp
+from transformers import AutoModelForImageSegmentation, AutoProcessor
+import torch
 
-def apply_remove_person(image):
-    """
-    Detect and remove persons from the image using Mediapipe Selfie Segmentation.
+class PersonRemover:
+    def __init__(self):
+        model_name = "briaai/RMBG-1.4"
+        self.processor = AutoProcessor.from_pretrained(model_name)
+        self.model = AutoModelForImageSegmentation.from_pretrained(model_name)
 
-    Parameters:
-        image (numpy.ndarray): Input image in BGR format.
+    def remove_person(self, img_path):
+        image = cv2.imread(img_path)
+        rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-    Returns:
-        numpy.ndarray: Image with persons removed and background filled.
-    """
-    # Initialize Mediapipe Selfie Segmentation
-    mp_selfie_segmentation = mp.solutions.selfie_segmentation
+        inputs = self.processor(images=rgb, return_tensors="pt")
+        with torch.no_grad():
+            outputs = self.model(**inputs)
 
-    # Convert the image to RGB for Mediapipe
-    rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        mask = outputs.pred_masks.squeeze().cpu().numpy()
+        mask = (mask > 0.5).astype(np.uint8) * 255  # 이진화
 
-    # Perform segmentation
-    with mp_selfie_segmentation.SelfieSegmentation(model_selection=1) as segmentation:
-        results = segmentation.process(rgb_image)
-
-        # Create mask for detected persons
-        mask = results.segmentation_mask > 0.5
-        mask = mask.astype(np.uint8) * 255  # Convert to binary mask (0 or 255)
-
-        # Invert the mask (person areas become white, background black)
-        mask_inv = cv2.bitwise_not(mask)
-
-        # Use inpainting to fill the person area with background
-        inpainted_image = cv2.inpaint(image, mask, inpaintRadius=7, flags=cv2.INPAINT_TELEA)
-
-        return inpainted_image
+        # 사람 부분 제거 후 inpaint
+        removed = cv2.inpaint(image, mask, 3, cv2.INPAINT_NS)
+        return removed
 
 
 '''
