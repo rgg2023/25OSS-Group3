@@ -36,11 +36,11 @@ class FilterApp:
         self.root.title("Photo Filter Application")
         self.root.geometry("1000x800")
         
-        # UI/GUI 변수 정의 (모바일 스타일에 맞게)
+        # UI/GUI 변수 정의 
         ctk.set_appearance_mode("Dark")
-        ctk.set_default_color_theme("green") # Green 테마로 변경 (모바일 앱에서 자주 사용되는 산뜻한 색상)
-
-        self.button_corner_radius = 12 # 버튼 둥글기 증가 (모바일 스타일)
+        ctk.set_default_color_theme("green") # Green 테마로 변경
+        
+        self.button_corner_radius = 12 # 버튼 둥글기 증가
         self.open_save_button_width = 250 # 버튼 크기 대폭 확대
         self.open_save_button_height = 50
         self.filter_button_width = 100
@@ -67,7 +67,7 @@ class FilterApp:
 
     def init_gui(self):
         
-        # 1. Title 및 Header (모바일 상단 상태바 느낌)
+        # 1. Title 및 Header 
         title_label = ctk.CTkLabel(self.root, text="Photo Filter Application", font=("Arial", 20, "bold"),
                                    text_color=self.title_color)
         title_label.grid(row=0, column=0, pady=(15, 5), sticky="n")
@@ -97,7 +97,7 @@ class FilterApp:
         self.canvas = ctk.CTkCanvas(self.canvas_frame, bg="#333333", bd=0, highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
 
-        # Canvas Navigation Buttons (이전과 동일, 모바일의 스와이프 느낌을 간접적으로 표현)
+        # Canvas Navigation Buttons
         self.left_button = ctk.CTkButton(self.canvas, text="<", width=40, height=40, corner_radius=20, 
                                         fg_color="rgba(0,0,0,0.4)", hover_color="rgba(0,0,0,0.6)", 
                                         text_color="#FFFFFF", command=self.show_previous_image)
